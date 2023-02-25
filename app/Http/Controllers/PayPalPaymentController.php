@@ -7,11 +7,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PayPalController extends Controller
 {
-    /**
-     * Responds with a welcome message with instructions
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function payment()
     {
         $data = [];

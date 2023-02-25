@@ -75,13 +75,13 @@ class PayPalService
         // $details
         // ->setShipping($shipping)
         //     ->setTax($tax)
-            // ->setSubtotal(sprintf('%0.2f', $pedido->total));
+        // ->setSubtotal(sprintf('%0.2f', $pedido->total));
 
         // Create chargeable amount
         $amount = new Amount();
         $amount->setCurrency(config('MXN'))
             ->setTotal(sprintf('%0.2f', $pedido->total));
-            // ->setDetails($details);
+        // ->setDetails($details);
 
         // Creating a transaction
         $transaction = new Transaction();

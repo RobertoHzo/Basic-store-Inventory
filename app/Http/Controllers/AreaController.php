@@ -38,10 +38,6 @@ class AreaController extends Controller
         return redirect()->route('areas.index');
     }
 
-    public function show($id)
-    {
-    }
-
     public function edit(Area $area)
     {
         return view('areas.edit', compact('area'));

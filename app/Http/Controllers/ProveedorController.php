@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Proveedor;
 
 use Illuminate\Http\Request;
@@ -10,18 +11,13 @@ class ProveedorController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:ver-proveedor|crear-proveedor|editar-proveedor|eliminar-proveedor', ['only'=> ['index']]);
-        $this->middleware('permission:crear-proveedor', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:editar-proveedor', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:eliminar-proveedor', ['only'=> ['destroy']]);
+        $this->middleware('permission:ver-proveedor|crear-proveedor|editar-proveedor|eliminar-proveedor', ['only' => ['index']]);
+        $this->middleware('permission:crear-proveedor', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-proveedor', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-proveedor', ['only' => ['destroy']]);
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $proveedors = Proveedor::paginate(1000);
@@ -34,8 +30,10 @@ class ProveedorController extends Controller
     }
 
     public function store(Request $request)
-    {      request()->validate([
-            'nombre'=> 'required',]);
+    {
+        request()->validate([
+            'nombre' => 'required',
+        ]);
         $proveedor = $request->all();
         Proveedor::create($proveedor);
         return redirect()->route('proveedors.index');
@@ -43,13 +41,13 @@ class ProveedorController extends Controller
 
     public function edit(Proveedor $proveedor)
     {
-        return view('proveedors.edit' ,compact('proveedor'));
+        return view('proveedors.edit', compact('proveedor'));
     }
 
     public function update(Request $request, Proveedor $proveedor)
     {
         request()->validate([
-            'nombre'=> 'required',
+            'nombre' => 'required',
         ]);
         $prod = $request->all();
         $proveedor->update($prod);
@@ -62,9 +60,4 @@ class ProveedorController extends Controller
         return redirect()->route('proveedors.index');
     }
 
-
-    public function show($id)
-    {
-        //
-    }
 }

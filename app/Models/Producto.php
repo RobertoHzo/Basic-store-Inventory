@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,13 +19,14 @@ class Producto extends Model
     ];
     public function categorias()
     {
-        return $this->belongsTo(Categoria::class,'categoria_id');
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
     public function pedidos()
     {
         return $this->hasMany(Pedido::class);
     }
-    public function pedidoProducto(){
+    public function pedidoProducto()
+    {
         return $this->belongsToMany(Pedidoproducto::class);
     }
 }

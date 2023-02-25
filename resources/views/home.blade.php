@@ -6,7 +6,6 @@
         <h3 class="page_heading">Inicio</h3>
     </div>
     <div class="section-body">
-
         <div class="col-md-12">
             <div class="row ">
                 @php

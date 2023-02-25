@@ -11,10 +11,10 @@ class ProductoController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:ver-productos|crear-producto|editar-producto|eliminar-producto', ['only'=> ['index']]);
-        $this->middleware('permission:crear-producto', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:editar-producto', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:eliminar-producto', ['only'=> ['destroy']]);
+        $this->middleware('permission:ver-productos|crear-producto|editar-producto|eliminar-producto', ['only' => ['index']]);
+        $this->middleware('permission:crear-producto', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-producto', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-producto', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -32,10 +32,10 @@ class ProductoController extends Controller
 
     public function home()
     {
-        $productos = Producto::where('disponible','=','SI')
-                ->limit(4)
-                ->inRandomOrder()
-                ->get();
+        $productos = Producto::where('disponible', '=', 'SI')
+            ->limit(4)
+            ->inRandomOrder()
+            ->get();
         return view('main.index')->with('productos', $productos);
     }
 
@@ -47,10 +47,10 @@ class ProductoController extends Controller
 
     public function cart() //productos sugeridos
     {
-        $productos = Producto::where('disponible','=','SI')
-                ->limit(4)
-                ->inRandomOrder()
-                ->get();
+        $productos = Producto::where('disponible', '=', 'SI')
+            ->limit(4)
+            ->inRandomOrder()
+            ->get();
         return view('main.cart')->with('productos', $productos);
     }
 
@@ -118,12 +118,12 @@ class ProductoController extends Controller
 
     public function cartList()
     {
-            $cartItems = \Cart::getContent();//obtiene el contenido del carrito
-            $productos = Producto::where('disponible','=','SI')
-                ->limit(4)
-                ->inRandomOrder()
-                ->get(); // productos sugeridos de la parte de abajo
-            return view('main.cart', compact('cartItems'))->with('productos', $productos);
+        $cartItems = \Cart::getContent(); //obtiene el contenido del carrito
+        $productos = Producto::where('disponible', '=', 'SI')
+            ->limit(4)
+            ->inRandomOrder()
+            ->get(); // productos sugeridos
+        return view('main.cart', compact('cartItems'))->with('productos', $productos);
     }
 
     public function addToCart(Request $request)
@@ -134,12 +134,11 @@ class ProductoController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity,
             'attributes' => array(
-            'image' => $request->image,
+                'image' => $request->image,
             )
         ]);
         session()->flash('success', '¡Producto añadido al carrito correctamente!');
         return redirect()->route('cart.list');
-
     }
 
     public function updateCart(Request $request)
@@ -150,8 +149,6 @@ class ProductoController extends Controller
         );
         session()->flash('success', '¡Cantidad actualizada correctamente!');
         return redirect()->route('cart.list');
-
-
     }
 
     public function removeCart(Request $request)
@@ -159,8 +156,6 @@ class ProductoController extends Controller
         \Cart::remove($request->id);
         session()->flash('success', '¡Producto eliminado correctamente!');
         return redirect()->route('cart.list');
-
-
     }
 
     public function clearAllCart()
@@ -168,19 +163,5 @@ class ProductoController extends Controller
         \Cart::clear();
         session()->flash('success', '¡Todos los productos se han eliminado!');
         return redirect()->route('cart.list');
-
-
     }
-
-    ///////////////////////////////////
-    // function checkout(){
-    //     if(Auth::user()){
-	// 	$cart_contents = \Cart::getContent();
-
- 	// 	$user = Auth::user();
-	// 	return view ('main.checkout',array('cart_contents'=>$cart_contents,'user'=>$user));
-    //     }
-    //     return redirect("login");
-
-  	// }
 }

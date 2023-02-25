@@ -57,8 +57,6 @@ class MateriapController extends Controller
 
     public function update(Request $request, Materiap $materiap)
     {
-        // request()->validate(['nombre'=> 'required','proveedor_id'=> 'required',
-        //     'cantidad'=> 'required','precio'=> 'required','area_id'=> 'required',]);
         $prod = $request->all();
         $materiap->update($prod);
         return redirect()->route('materiaps.index');

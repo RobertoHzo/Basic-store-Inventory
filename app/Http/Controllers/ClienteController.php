@@ -22,48 +22,9 @@ class ClienteController extends Controller
         $clientes = User::select("*")
             ->where("is_admin", "=", 0)
             ->paginate(100);
-        return view('clientes.index', compact('clientes'));}
+        return view('clientes.index', compact('clientes'));
+    }
 
-    // public function create(){return view('clientes.create');}
-
-    // public function store(Request $request)
-    // {   $this->validate(       $request,
-    //         [   'nombre' => 'required',
-    //             'apellido' => 'required',
-    //             'email' => 'required|email|unique:clientes,email',
-    //             'telefono' => 'required',
-    //             'contraseña' => 'required|same:confirm-password',]
-    //     );
-    //     $input = $request->all();
-    //     $input['contraseña'] = Hash::make($input['contraseña']);
-    //     Cliente::create($input);
-    //     return redirect()->route('clientes.index');
-    // }
-
-    // public function edit($id)
-    // {$cliente = Cliente::find($id);
-    //     return view('clientes.edit', compact('cliente'));}
-
-    // public function update(Request $request, $id)
-    // {$this->validate(       $request,
-    //         [   'nombre' => 'required',
-    //             'apellido' => 'required',
-    //             'email' => 'required|email|unique:clientes,email,' . $id,
-    //             'telefono' => 'required',
-    //             'contraseña' => 'same:confirm-password',]
-    //     );
-    //     $input = $request->all();
-    //     if (!empty($input['contraseña'])) {
-    //         $input['contraseña'] = Hash::make($input['contraseña']);
-    //     } else {
-    //         $input = Arr::except($input, array('contraseña'));}
-    //     $cliente = Cliente::find($id);
-    //     $cliente->update($input);
-    //     return redirect()->route('clientes.index');}
-
-    // public function destroy($id)
-    // { Cliente::find($id)->delete();
-    //     return redirect()->route('clientes.index');}
     public function edit($id)
     {
         $user = User::find($id);
@@ -90,11 +51,4 @@ class ClienteController extends Controller
         return redirect()->route('dashboard');
     }
 
-    // public function destroy($id)
-    // {
-    //     User::find($id)->delete();
-    //     Session::flush();
-    //     Auth::logout();
-    //     return redirect()->route('/');
-    // }
 }

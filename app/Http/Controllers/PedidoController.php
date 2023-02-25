@@ -26,7 +26,7 @@ class PedidoController extends Controller
         $to = trim($request->get('dos'));
         if ($from != '' && $from != '') {
             $pedidos = Pedido::whereBetween('fecha', [$from, $to])
-            ->paginate(1000);
+                ->paginate(1000);
             return view('pedidos.index', compact('pedidos'));
         }
 
@@ -62,13 +62,10 @@ class PedidoController extends Controller
         return view('pedidos.edit', compact('pedido'));
     }
 
-    // public function update(Request $request, Pedido $pedido)
     public function update(Request $request, Pedido $pedido)
-
     {
         request()->validate([
             'hora_entrega' => 'required',
-
         ]);
         $prod = $request->all();
         $pedido->update($prod);
@@ -79,11 +76,11 @@ class PedidoController extends Controller
         // ->limit(1)  // optional - to ensure only one record is updated.
         // ->update(array('status' => 'Completado'));  // update the record in the DB.
 
-    //     Pedido::where('id', $pedido)
-    //    ->update([
-    //        'status' => 'Completado'
-    //     ]);
-    //     return view('pedidos.index');
+        //     Pedido::where('id', $pedido)
+        //    ->update([
+        //        'status' => 'Completado'
+        //     ]);
+        //     return view('pedidos.index');
     }
 
     public function destroy(Pedido $pedido)
@@ -92,12 +89,12 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index');
     }
 
-    public function completar(Pedido $pedido){
+    public function completar(Pedido $pedido)
+    {
         DB::table('pedidos')
-        ->where('id', $pedido)  // find your user by their email
-        ->limit(1)  // optional - to ensure only one record is updated.
-        ->update(array('status' => 'Completado'));  // update the record in the DB.
+            ->where('id', $pedido)  
+            ->limit(1)  // optional - to ensure only one record is updated.
+            ->update(array('status' => 'Completado'));  // update the record in the DB.
         return redirect()->route('pedidos.index');
-
     }
 }

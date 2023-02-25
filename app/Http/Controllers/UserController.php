@@ -21,19 +21,15 @@ class UserController extends Controller
         $this->middleware('permission:editar-usuario', ['only' => ['edit', 'update']]);
         $this->middleware('permission:eliminar-usuario', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $from = trim($request->get('uno'));
         $to = trim($request->get('dos'));
         if ($from != '' && $from != '') {
             $users = User::whereBetween('created_at', [$from, $to])
-            ->where("is_admin","=",1)
-            ->paginate(1000);
+                ->where("is_admin", "=", 1)
+                ->paginate(1000);
             return view('users.index', compact('users'));
         }
 
@@ -63,7 +59,7 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-        $user->is_admin = '1'; //para que se creen admins
+        $user->is_admin = '1';
         return redirect()->route('users.index');
     }
 
@@ -104,40 +100,4 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index');
     }
-
-    // ++++++++++++++++++++++++++++++++++Clientes+++++++++++++++++++++++++++++
-
-    // public function editClient($id)
-    // {
-    //     $user = User::find($id);
-
-    //     return view('main.usuario.editar', compact('user'));
-    // }
-
-    // public function updateClient(Request $request, $id)
-    // {
-    //     $this->validate($request, [
-    //         'name' => 'required', 'lastname' => 'required',
-    //         'email' => 'required|email|unique:users,email,' .
-    //             $id, 'password' => 'same:confirm-password',
-    //     ]);
-
-    //     $input = $request->all();
-    //     if (!empty($input['password'])) {
-    //         $input['password'] = Hash::make($input['password']);
-    //     } else {
-    //         $input = Arr::except($input, array('password'));
-    //     }
-    //     $user = User::find($id);
-    //     $user->update($input);
-    //     return redirect()->route('dashboard');
-    // }
-
-    // public function destroyClient($id)
-    // {
-    //     User::find($id)->delete();
-    //     Session::flush();
-    //     Auth::logout();
-    //     return redirect()->route('/');
-    // }
 }

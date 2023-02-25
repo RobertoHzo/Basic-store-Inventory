@@ -11,9 +11,8 @@ use App\Models\Pedido_producto;
 
 class PaypalCardController extends Controller
 {
-    // Primero debes instalar Guzzle
+    // Primero instalar Guzzle
     //    composer require guzzlehttp/guzzle
-
 
     // Las peticiones HTTP las puedes hacer usando un cliente de Guzzle,
     // que puedes definir en el constructor, donde además accedemos a nuestras credenciales de PayPal.
@@ -56,7 +55,7 @@ class PaypalCardController extends Controller
     }
 
 
-    public function process($orderId,$notes,$hora, Request $request)
+    public function process($orderId, $notes, $hora, Request $request)
     {
         // Aquí primero obtenemos un accessToken
         $accessToken = $this->getAccessToken();
@@ -90,7 +89,7 @@ class PaypalCardController extends Controller
                 'order_number'      =>  $payPalPaymentId,
                 'user_id'           => auth()->user()->id,
                 'status'            =>  'Por completar',
-                'total'       => number_format($amount,2) ,
+                'total'       => number_format($amount, 2),
                 'item_count'        =>  \Cart::getTotalQuantity(),
                 'payment_status'    =>  $data['status'],
                 'notes'             =>  $notes,
@@ -111,7 +110,6 @@ class PaypalCardController extends Controller
                 }
             }
             \Cart::clear();
-            // return view('main.success', compact('pedido'));
             return [
                 'success' => true,
                 'url' => 'success', // link al que redirigira despues de completar el pago
@@ -121,6 +119,4 @@ class PaypalCardController extends Controller
         // Dar una respuesta de error si el status no es COMPLETED
         return $this->responseFailure();
     }
-
-
 }

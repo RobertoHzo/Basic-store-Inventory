@@ -70,13 +70,13 @@ class CheckoutController extends Controller
         $user = Auth::user();
         $prods = Pedido_producto::class;
 
-        return view('main.checkout', array( 'user' => $user, 'prods' => $prods));
+        return view('main.checkout', array('user' => $user, 'prods' => $prods));
     }
 
     public function placeOrder(Request $request)
     {
         // Before storing the order we should implement the
-        // request validation which I leave it to you
+        // request validation
 
         // $order = $this->storeOrderDetails($request->all());
 
@@ -112,9 +112,6 @@ class CheckoutController extends Controller
         }
         // return $pedido;
         return view('main.success', compact('pedido'));
-
-        // return redirect()->back()->with('message', 'Order not placed'); ///
-        // return route('make.payment');
 
     }
 }

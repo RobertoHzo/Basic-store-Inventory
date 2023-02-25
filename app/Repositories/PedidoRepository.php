@@ -20,7 +20,7 @@ class PedidoRepository extends BaseRepository implements PedidoContract
     public function storeOrderDetails($params)
     {
         $order = Pedido::create([
-            'order_number'      =>  'ORD-'.strtoupper(uniqid()),
+            'order_number'      =>  'ORD-' . strtoupper(uniqid()),
             'user_id'           => auth()->user()->id,
             'status'            =>  'pending',
             'total'       =>  Cart::getSubTotal(),
@@ -41,8 +41,7 @@ class PedidoRepository extends BaseRepository implements PedidoContract
 
             $items = Cart::getContent();
 
-            foreach ($items as $item)
-            {
+            foreach ($items as $item) {
                 // A better way will be to bring the producto id with the cart items
                 // you can explore the package documentation to send producto id with the cart
                 $producto = Producto::where('name', $item->name)->first();
@@ -59,14 +58,4 @@ class PedidoRepository extends BaseRepository implements PedidoContract
 
         return $order;
     }
-
-    // public function listOrders(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
-    // {
-    //     return $this->all($columns, $order, $sort);
-    // }
-
-    // public function findOrderByNumber($orderNumber)
-    // {
-    //     return Pedido::where('order_number', $orderNumber)->first();
-    // }
 }

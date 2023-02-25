@@ -7,11 +7,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PayPalController extends Controller
 {
-    /**
-     * Responds with a welcome message with instructions
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function payment()
     {
         $data = [];
@@ -39,21 +35,13 @@ class PayPalController extends Controller
         return redirect($response['paypal_link']);
     }
 
-    /**
-     * Responds with a welcome message with instructions
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function cancel()
     {
         dd('Your payment is canceled. You can create cancel page here.');
     }
 
-    /**
-     * Responds with a welcome message with instructions
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function success(Request $request)
     {
         $response = $provider->getExpressCheckoutDetails($request->token);

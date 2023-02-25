@@ -12,7 +12,6 @@ Areas
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        {{-- <h3 class="text-center">Dashboard Content</h3> --}}
                         @can('crear-area')
                         <a href="{{ route('areas.create') }}" class="btn btn-warning">Nueva Area</a>
                         @endcan
@@ -76,8 +75,6 @@ Areas
     <script>
         (function () {
             'use strict'
-            //debemos crear la clase formEliminar dentro del form del boton borrar
-            //recordar que cada registro a eliminar esta contenido en un form
             var forms = document.querySelectorAll('.formEliminar')
             Array.prototype.slice.call(forms)
             .forEach(function (form) {
@@ -94,7 +91,6 @@ Areas
                     }).then((result) => {
                         if (result.isConfirmed) {
                             this.submit();
-                            // Swal.fire('¡Eliminado!', 'El registro ha sido eliminado exitosamente.','success');
                             Swal.fire({
 
                                 icon: 'success',
