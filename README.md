@@ -6,6 +6,7 @@ Este proyecto es una aplicacion web desarrollada con el framework de Laravel dis
 3. Pago en línea utilizando la API de Paypal.
 4. Administración de inventario de productos y materia prima.
 5. Administración de clientes y usuarios.
+6. Roles y permisos para los diferentes tipos de usuarios de la aplicación.
 
 
 ### Instalación 🔧
