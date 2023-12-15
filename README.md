@@ -1,11 +1,11 @@
 # Restaurant web application
 
 Este proyecto es una aplicacion web desarrollada con el framework de Laravel diseñada para un restaurante que cuenta con las siguientes funciones:
-• Catálogo de productos disponibles para venta.
-• Carrito de compras.
-• Pago en línea utilizando la API de Paypal.
-• Administración de inventario de productos y materia prima.
-• Administración de clientes y usuarios.
+1. Catálogo de productos disponibles para venta.
+2. Carrito de compras.
+3. Pago en línea utilizando la API de Paypal.
+4. Administración de inventario de productos y materia prima.
+5. Administración de clientes y usuarios.
 
 
 ### Instalación 🔧
