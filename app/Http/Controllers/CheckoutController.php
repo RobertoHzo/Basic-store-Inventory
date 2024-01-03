@@ -2,49 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use PayPal\Api\Item;
-use PayPal\Api\Payer;
 use App\Models\Pedido;
-// use App\Contracts\PedidoContract;
-// use Darryldecode\\Cart\\Cart;
-use Mockery\Exception;
-use PayPal\Api\Amount;
-use PayPal\Api\Details;
-
-use PayPal\Api\Payment;
 use App\Models\Producto;
-use PayPal\Api\ItemList;
-use Darryldecode\Cart\Cart;
-use PayPal\Api\Transaction;
-use PayPal\Rest\ApiContext;
 use Illuminate\Http\Request;
-use PayPal\Api\RedirectUrls;
 use App\Models\Pedido_producto;
-use PayPal\Api\PaymentExecution;
-use App\Contracts\PedidoContract;
-use App\Services\PayPalService; ///
+use App\Services\PayPalService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use PayPal\Exception\PayPalConnectionException;
-
-
 
 class CheckoutController extends Controller
 {
-    // protected $orderRepository;
-
-    // public function __construct(PedidoContract $orderRepository)
-    // {
-    //     $this->orderRepository = $orderRepository;
-    // }
-
-    protected $payPal; ///
-    public function __construct(PayPalService $payPal) ///
+    protected $payPal;
+    public function __construct(PayPalService $payPal)
     {
         $this->payPal = $payPal;
     }
 
-    public function complete(Request $request) ///
+    public function complete(Request $request)
     {
         $paymentId = $request->input('paymentId');
         $payerId = $request->input('PayerID');
@@ -54,7 +28,6 @@ class CheckoutController extends Controller
         $pedido = Pedido::where('order_number', $status['invoiceId'])->first();
         $pedido->status = 'processing';
         $pedido->payment_status = 1;
-        // $pedido->payment_method = 'PayPal -' . $status['salesId'];
         $pedido->save();
 
         \Cart::clear();
@@ -64,9 +37,6 @@ class CheckoutController extends Controller
 
     public function getCheckout()
     {
-        // return view('main.checkout');
-        // $cart_contents = \Cart::getContent();
-
         $user = Auth::user();
         $prods = Pedido_producto::class;
 
@@ -77,10 +47,6 @@ class CheckoutController extends Controller
     {
         // Before storing the order we should implement the
         // request validation
-
-        // $order = $this->storeOrderDetails($request->all());
-
-        // dd($order);
         $pedido = Pedido::create([
             'order_number'      =>  'ORD-' . strtoupper(uniqid()),
             'user_id'           => auth()->user()->id,
@@ -105,13 +71,7 @@ class CheckoutController extends Controller
                 ]);
                 $pedido->items()->save($Pedido_producto);
             }
-            // $this->payPal->processPayment($pedido); ///
-
-            ////////////
-            //  return route('make.payment');
         }
-        // return $pedido;
         return view('main.success', compact('pedido'));
-
     }
 }

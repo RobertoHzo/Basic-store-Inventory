@@ -13,9 +13,6 @@ class PedidoController extends Controller
     function __construct()
     {
         $this->middleware('permission:ver-pedidos|crear-pedido|editar-pedido|eliminar-pedido', ['only' => ['index']]);
-        // $this->middleware('permission:crear-pedido', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:editar-pedido', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:eliminar-pedido', ['only' => ['destroy']]);
     }
 
 
@@ -70,17 +67,6 @@ class PedidoController extends Controller
         $prod = $request->all();
         $pedido->update($prod);
         return redirect()->route('pedidos.index');
-
-        // DB::table('pedidos')
-        // ->where('id', $pedido)  // find your user by their email
-        // ->limit(1)  // optional - to ensure only one record is updated.
-        // ->update(array('status' => 'Completado'));  // update the record in the DB.
-
-        //     Pedido::where('id', $pedido)
-        //    ->update([
-        //        'status' => 'Completado'
-        //     ]);
-        //     return view('pedidos.index');
     }
 
     public function destroy(Pedido $pedido)
@@ -92,7 +78,7 @@ class PedidoController extends Controller
     public function completar(Pedido $pedido)
     {
         DB::table('pedidos')
-            ->where('id', $pedido)  
+            ->where('id', $pedido)
             ->limit(1)  // optional - to ensure only one record is updated.
             ->update(array('status' => 'Completado'));  // update the record in the DB.
         return redirect()->route('pedidos.index');

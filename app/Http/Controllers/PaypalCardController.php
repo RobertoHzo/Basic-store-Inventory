@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use GuzzleHttp\Client;
-use App\Models\Producto;
-use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use App\Models\Pedido_producto;
 
@@ -55,7 +53,7 @@ class PaypalCardController extends Controller
     }
 
 
-    public function process($orderId, $notes, $hora, Request $request)
+    public function process($orderId, $notes, $hora)
     {
         // Aquí primero obtenemos un accessToken
         $accessToken = $this->getAccessToken();
@@ -83,9 +81,8 @@ class PaypalCardController extends Controller
             $amount = $data['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
 
 
-            // ************************* Creacion del pedido en la bd ************************************************************
+            // Creacion del pedido en la bd
             $pedido = Pedido::create([
-                // 'order_number'      =>  'ORD-' . strtoupper(uniqid()),
                 'order_number'      =>  $payPalPaymentId,
                 'user_id'           => auth()->user()->id,
                 'status'            =>  'Por completar',
@@ -100,7 +97,6 @@ class PaypalCardController extends Controller
             if ($pedido) { // si se crea el pedido...
                 $items = \Cart::getContent();
                 foreach ($items as $item) { // por cada producto va a crear un registro con su cantidad y precio
-                    // $producto = Producto::where('id', $item->id)->first();
                     $Pedido_producto = new Pedido_producto([
                         'producto_id'    =>  $item->id,
                         'cantidad'      =>  $item->quantity,
@@ -115,7 +111,6 @@ class PaypalCardController extends Controller
                 'url' => 'success', // link al que redirigira despues de completar el pago
             ];
         }
-        // *************************************************************************************************
         // Dar una respuesta de error si el status no es COMPLETED
         return $this->responseFailure();
     }

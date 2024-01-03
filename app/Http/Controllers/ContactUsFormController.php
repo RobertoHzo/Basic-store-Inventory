@@ -9,7 +9,7 @@ use Mail;
 class ContactUsFormController extends Controller
 {
     // Create Contact Form
-    public function createForm(Request $request)
+    public function createForm()
     {
         return view('main.contact');
     }

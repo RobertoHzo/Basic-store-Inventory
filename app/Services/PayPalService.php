@@ -55,20 +55,6 @@ class PayPalService
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
 
-        // Adding items to the list
-        // $items = array();
-        // foreach ($pedido->items as $item) {
-        //     $orderItems[$item->id] = new Item();
-        //     $orderItems[$item->id]->setName($item->producto_id)
-        //         ->setCurrency("MXN")
-        //         ->setQuantity($item->cantidad)
-        //         ->setPrice($item->precio);
-
-        //     array_push($items, $orderItems[$item->id]);
-        // }
-
-        // $itemList = new ItemList();
-        // $itemList->setItems($items);
 
         // Setting Shipping Details
         // $details = new Details();

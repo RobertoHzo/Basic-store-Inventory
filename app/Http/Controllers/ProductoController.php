@@ -77,9 +77,6 @@ class ProductoController extends Controller
         return redirect()->route('productos.index');
     }
 
-    public function show($id)
-    {
-    }
 
     public function edit(Producto $producto)
     {

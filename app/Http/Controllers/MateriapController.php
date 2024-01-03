@@ -34,7 +34,7 @@ class MateriapController extends Controller
         return view('materiaps.create', compact('areas', 'proveedors'));
     }
 
-    public function storesi(Request $request) //no me acuerdo para q es, pero no va
+    public function storesi(Request $request) 
     {
         request()->validate([
             'nombre' => 'required',

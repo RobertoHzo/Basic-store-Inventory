@@ -26,14 +26,6 @@ class PedidoRepository extends BaseRepository implements PedidoContract
             'total'       =>  Cart::getSubTotal(),
             'item_count'        =>  Cart::getTotalQuantity(),
             'payment_status'    =>  0,
-            // 'payment_method'    =>  null,
-            // 'first_name'        =>  $params['first_name'],
-            // 'last_name'         =>  $params['last_name'],
-            // 'address'           =>  $params['address'],
-            // 'city'              =>  $params['city'],
-            // 'country'           =>  $params['country'],
-            // 'post_code'         =>  $params['post_code'],
-            // 'phone_number'      =>  $params['phone_number'],
             'notes'             =>  $params['notes']
         ]);
 
